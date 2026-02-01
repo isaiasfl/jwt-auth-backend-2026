@@ -1,7 +1,9 @@
 # Backend DWEC - Prisma + JWT
 
 > **Autor:** Isaías Fernández Lozano
-> 📧 [ifernandez@ieshlanz.es](mailto:ifernandez@ieshlanz.es) | 🐙 [@isaiasfl](https://github.com/isaiasfl)  
+> 
+> 📧 [ifernandez@ieshlanz.es](mailto:ifernandez@ieshlanz.es) | 🐙 [@isaiasfl](https://github.com/isaiasfl)
+>   
 > **Módulo:** DWEC (Desarrollo Web en Entorno Cliente)
 > 🎓 IES Hermenegildo Lanz | 📅 Febrero 2026
 
