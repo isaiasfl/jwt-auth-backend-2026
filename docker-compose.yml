@@ -42,7 +42,6 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3500
-      CORS_ORIGIN: http://localhost:5173
       JWT_SECRET: tu_super_secreto_jwt_cambiar_en_produccion_12345
       JWT_EXPIRES_IN: 1h
       DATABASE_URL: postgresql://dwec_user:dwec_password@postgres:5432/dwec_db?schema=public
