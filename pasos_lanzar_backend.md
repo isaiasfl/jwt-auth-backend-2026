@@ -347,7 +347,35 @@ docker compose up -d
 
 ---
 
-## 🔧 Troubleshooting (Solución de Problemas)
+## � Cómo actualizar el proyecto (Redespliegue)
+
+Si el profesor ha subido cambios al repositorio o tú has modificado el código y quieres que se reflejen en los contenedores, sigue estos pasos:
+
+### 1. Descargar los últimos cambios
+
+```bash
+git pull origin main
+```
+
+### 2. Actualizar las imágenes y reiniciar contenedores
+
+El flag `--build` es fundamental para que Docker vuelva a leer el código fuente y genere nuevas imágenes.
+
+```bash
+docker compose up -d --build
+```
+
+### 3. Aplicar posibles cambios en la base de datos
+
+Si se han añadido nuevas tablas o modelos:
+
+```bash
+docker compose exec backend npx prisma migrate dev
+```
+
+---
+
+## �🔧 Troubleshooting (Solución de Problemas)
 
 ### Error: "port is already allocated"
 
@@ -485,7 +513,7 @@ Marca cada paso a medida que lo completes:
 - [ ] Seed ejecutado (`npm run prisma:seed`)
 - [ ] Healthcheck responde: `curl http://localhost:3500/health`
 - [ ] Login funciona correctamente
-- [ ] pgAdmin accesible en http://localhost:3502
+- [ ] pgAdmin accesible en <http://localhost:3502>
 - [ ] Colección de Insomnia importada (opcional pero recomendado)
 
 **¡Listo! El backend está funcionando y puedes empezar a desarrollar tu frontend React.** 🚀
@@ -504,7 +532,7 @@ Marca cada paso a medida que lo completes:
 
 ## 👨‍💻 Autor
 
-**Isaías Fernández Lozano**
+### Isaías Fernández Lozano
 
 - 📧 Email: [ifernandez@ieshlanz.es](mailto:ifernandez@ieshlanz.es)
 - 🐙 GitHub: [@isaiasfl](https://github.com/isaiasfl)

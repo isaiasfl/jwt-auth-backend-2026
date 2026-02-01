@@ -3,13 +3,17 @@
  * Contiene funciones para hacer peticiones HTTP a los endpoints de autenticación
  */
 
-import type { AuthResponse, MeResponse, ErrorResponse } from '../types/auth.types';
+import type {
+  AuthResponse,
+  ErrorResponse,
+  MeResponse,
+} from "../types/auth.types";
 
 /**
  * URL base del backend
  * Asegúrate de que el backend esté corriendo en este puerto
  */
-const API_URL = 'http://localhost:3500/api';
+const API_URL = "http://192.168.50.121:3500/api";
 
 /**
  * Realiza el login enviando email y password al backend
@@ -21,12 +25,12 @@ const API_URL = 'http://localhost:3500/api';
  */
 export async function login(
   email: string,
-  password: string
+  password: string,
 ): Promise<AuthResponse> {
   const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
   });
@@ -36,7 +40,7 @@ export async function login(
   // Si la respuesta no es exitosa, lanzamos un error con el mensaje del backend
   if (!data.ok) {
     const errorData = data as ErrorResponse;
-    throw new Error(errorData.error.message || 'Error al iniciar sesión');
+    throw new Error(errorData.error.message || "Error al iniciar sesión");
   }
 
   return data as AuthResponse;
@@ -51,9 +55,9 @@ export async function login(
  */
 export async function getMe(token: string): Promise<MeResponse> {
   const response = await fetch(`${API_URL}/auth/me`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': `Bearer ${token}`, // Enviar token en el header
+      Authorization: `Bearer ${token}`, // Enviar token en el header
     },
   });
 
@@ -62,7 +66,7 @@ export async function getMe(token: string): Promise<MeResponse> {
   // Si la respuesta no es exitosa, lanzamos un error
   if (!data.ok) {
     const errorData = data as ErrorResponse;
-    throw new Error(errorData.error.message || 'Error al obtener usuario');
+    throw new Error(errorData.error.message || "Error al obtener usuario");
   }
 
   return data as MeResponse;
