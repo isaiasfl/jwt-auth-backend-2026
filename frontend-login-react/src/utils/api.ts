@@ -13,7 +13,7 @@ import type {
  * URL base del backend
  * Asegúrate de que el backend esté corriendo en este puerto
  */
-const API_URL = "http://192.168.50.121:3500/api";
+const API_URL = "http://localhost:3500/api";
 
 /**
  * Realiza el login enviando email y password al backend

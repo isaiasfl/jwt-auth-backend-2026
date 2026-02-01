@@ -10,4 +10,4 @@ coverage
 *.swo
 
 # Frontend para ejercicio de clase - no incluir en repo público
-frontend-login-react/
+# frontend-login-react/
