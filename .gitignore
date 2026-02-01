@@ -8,6 +8,3 @@ coverage
 .idea
 *.swp
 *.swo
-
-# Frontend para ejercicio de clase - no incluir en repo
-frontend-login-react/

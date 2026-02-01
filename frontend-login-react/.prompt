@@ -1,0 +1,44 @@
+Lee el fichero CHECKPOINT_CREACION.md para ver el estado actual del proyecto.
+
+Debes continuar la creación del frontend de React desde donde se quedó.
+
+REQUISITOS ESPECÍFICOS:
+
+1. Stack: Vite + TypeScript + Tailwind CSS 4 + React Router DOM + React 19.2
+2. Para Tailwind CSS:
+   - Instalar: tailwindcss @tailwindcss/vite
+   - Modificar vite.config.ts añadiendo tailwindcss()
+   - Eliminar App.css
+   - Limpiar index.css dejando solo: @import "tailwindcss"
+
+3. Usar las nuevas funcionalidades de React 19.2:
+   - Hook "use"
+   - Form Actions con useActionState
+   - useFormStatus
+   - Cualquier otra nueva funcionalidad aplicable
+
+4. Crear contexto global de Auth con hook personalizado useAuth para:
+   - login
+   - logout
+   - checkAuth
+   - Estado: user, token, loading, error
+
+5. Rutas básicas (SIN florituras):
+   - /login - Formulario de login
+   - /dashboard - Página protegida
+   - / - Redirige según estado de auth
+
+6. Formulario de login:
+   - Usar nuevos hooks de formularios de React 19.2
+   - Conectar con: POST http://localhost:3500/api/auth/login
+   - Campos: email, password
+   - Credenciales de prueba: user@dwec.com / user123
+
+7. TODO EL CÓDIGO DEBE ESTAR DOCUMENTADO con comentarios explicando qué hace cada parte.
+
+Backend ya funcional en: http://localhost:3500
+Endpoints disponibles:
+- POST /api/auth/login
+- GET /api/auth/me (requiere Bearer token)
+
+Continúa desde el siguiente paso pendiente marcado en CHECKPOINT_CREACION.md y actualiza ese archivo conforme avances.
