@@ -1,0 +1,144 @@
+Actúa como un arquitecto senior backend docente y genera un proyecto completo llamado:
+
+"backend-dwec-prisma-jwt"
+
+Objetivo:
+Backend en Node.js + Express + TypeScript con ESM (import/export) para que alumnos de React practiquen:
+- Registro + Login (OBLIGATORIO) con JWT
+- CRUD completo sobre un recurso ejemplo "tasks"
+- Plantilla repetible para crear cualquier nuevo recurso (ej: productos, alumnos, incidencias, películas)
+- PostgreSQL con Prisma (migrations + type safety)
+- Docker Compose con backend + postgres + pgAdmin
+- Documentación docente y colección de Insomnia
+
+Requisitos obligatorios:
+1) Stack
+- Node.js + Express
+- TypeScript estricto
+- ESM (import/export), NO require
+- Estructura limpia por módulos:
+  src/
+    app.ts
+    server.ts
+    config/
+    middlewares/
+    utils/
+    modules/
+      auth/
+      tasks/
+      (template-resource/)  <-- plantilla para copiar y crear nuevos CRUD
+- Validación estricta con Zod (body, params, query)
+- Error handling centralizado (AppError + errorMiddleware)
+- CORS configurable para Vite React (por defecto http://localhost:5173)
+- Seguridad mínima: helmet + rate limit básico
+- Healthcheck: GET /health
+
+2) Prisma + PostgreSQL
+- Prisma obligatorio
+- Incluir prisma/schema.prisma con modelos:
+  - User: id uuid, email unique, passwordHash, name opcional, role (USER|ADMIN), createdAt, updatedAt
+  - Task: id uuid, title, completed boolean, userId (relación con User), createdAt, updatedAt
+- Migrations listas + comandos claros:
+  - prisma migrate dev
+  - prisma generate
+  - seed inicial (1 admin + 1 user + 3 tasks)
+- Cada usuario SOLO ve y modifica sus tasks (ownership).
+
+3) Auth JWT (sin refresh token en esta versión)
+- Endpoints:
+  - POST /api/auth/register
+  - POST /api/auth/login
+  - GET  /api/auth/me   (requiere JWT)
+- JWT:
+  - Se envía en Authorization: Bearer <token>
+  - Expiración configurable (por defecto 1h)
+- Password hashing con bcrypt
+- Middleware requireAuth (tipado) que añade req.user = { id, email, role }
+
+4) Roles
+- role en User (USER y ADMIN)
+- Middleware requireRole("ADMIN")
+- Añadir un ejemplo de ruta solo admin, por ejemplo:
+  - GET /api/admin/users (lista usuarios) o GET /api/admin/stats
+- Documentar claramente cómo probar un 403 desde Insomnia/React.
+
+5) CRUD Tasks protegido
+- Endpoints protegidos por JWT:
+  - GET    /api/tasks
+  - GET    /api/tasks/:id
+  - POST   /api/tasks
+  - PUT    /api/tasks/:id
+  - DELETE /api/tasks/:id
+- Añadir paginación y búsqueda (muy útil para React):
+  - GET /api/tasks?page=1&limit=10&search=texto
+- Respuesta consistente en JSON:
+  { ok: true, data: ... } o { ok:false, error:{ code,message,details } }
+
+6) Docker Compose y puertos
+Generar docker-compose.yml que levante:
+- backend en host:3500
+- postgres en host:3501 (interno 5432)
+- pgadmin en host:3502
+pgAdmin:
+  - usuario: isaias
+  - contraseña: dwec-2026
+El backend debe conectarse a postgres por nombre de servicio (postgres).
+
+7) .env y .env_example
+- Incluir .env_example con variables:
+  NODE_ENV
+  PORT=3500
+  CORS_ORIGIN=http://localhost:5173
+  JWT_SECRET=...
+  JWT_EXPIRES_IN=1h
+  DATABASE_URL=postgresql://...  (usando servicio postgres)
+  PGADMIN_DEFAULT_EMAIL=isaias
+  PGADMIN_DEFAULT_PASSWORD=dwec-2026
+- Explicar si los puertos se cambian en compose o en env (elige una estrategia coherente y documenta cómo cambiarla).
+
+8) Documentación obligatoria
+Crear /documentacion con:
+- 00-overview.md (arquitectura y árbol de carpetas)
+- 01-setup.md (docker compose up, migraciones, seed, logs)
+- 02-auth.md (JWT simple: qué es, cómo usarlo en React con fetch)
+- 03-crud-tasks.md (endpoints + ejemplos fetch)
+- 04-how-to-create-a-new-resource.md (PLANTILLA paso a paso para crear un nuevo CRUD:
+   1) añadir modelo Prisma
+   2) migration
+   3) Zod schemas
+   4) routes/controller/service/repo
+   5) pruebas en Insomnia
+   6) ejemplo de fetch en React)
+- 05-troubleshooting.md (CORS, puertos, DB, migraciones)
+
+9) Insomnia (obligatorio)
+Incluir carpeta /insomnia con:
+- Un export de Insomnia listo para importar (JSON/YAML) con:
+  - Register
+  - Login (guarda token en variable de entorno/colección)
+  - Me
+  - CRUD tasks (todas las rutas usando el token automáticamente)
+  - Admin route (probando USER vs ADMIN)
+Explicar en documentación cómo importar y cómo se guarda el token.
+
+Entregables:
+- Árbol completo del proyecto
+- Contenido íntegro de los archivos clave:
+  package.json, tsconfig, Dockerfile, docker-compose.yml,
+  prisma/schema.prisma, prisma/seed.ts,
+  src/** (app, server, módulos, middlewares),
+  .env_example, README.md y /documentacion/*
+- Instrucciones de ejecución paso a paso:
+  1) docker compose up -d
+  2) migraciones + generate
+  3) seed
+  4) probar con Insomnia
+  5) ejemplos fetch para React
+
+Restricciones:
+- No uses require
+- Nada obsoleto
+- Mantén el código claro y docente
+- Debe compilar y arrancar sin cambios
+
+Ahora genera el proyecto completo.

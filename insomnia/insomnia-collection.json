@@ -1,0 +1,280 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-01-15T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_dwec",
+      "_type": "workspace",
+      "name": "DWEC Backend - Prisma JWT",
+      "description": "Backend educativo con autenticación JWT y CRUD de tareas",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3500",
+        "token": ""
+      },
+      "parentId": "wrk_dwec"
+    },
+    {
+      "_id": "req_health",
+      "_type": "request",
+      "name": "Healthcheck",
+      "method": "GET",
+      "url": "{{ _.base_url }}/health",
+      "headers": [],
+      "body": {},
+      "parentId": "fld_general"
+    },
+    {
+      "_id": "fld_general",
+      "_type": "request_group",
+      "name": "General",
+      "parentId": "wrk_dwec"
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "name": "Auth",
+      "parentId": "wrk_dwec"
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "name": "Register",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/register",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"test@dwec.com\",\n  \"password\": \"password123\",\n  \"name\": \"Usuario Test\"\n}"
+      },
+      "parentId": "fld_auth"
+    },
+    {
+      "_id": "req_login_user",
+      "_type": "request",
+      "name": "Login (USER)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/login",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"user@dwec.com\",\n  \"password\": \"user123\"\n}"
+      },
+      "parentId": "fld_auth",
+      "settingFollowRedirects": "global",
+      "settingSendCookies": true,
+      "settingStoreCookies": true
+    },
+    {
+      "_id": "req_login_admin",
+      "_type": "request",
+      "name": "Login (ADMIN)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/login",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@dwec.com\",\n  \"password\": \"admin123\"\n}"
+      },
+      "parentId": "fld_auth"
+    },
+    {
+      "_id": "req_me",
+      "_type": "request",
+      "name": "Get Me (Protected)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/auth/me",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_auth"
+    },
+    {
+      "_id": "fld_tasks",
+      "_type": "request_group",
+      "name": "Tasks",
+      "parentId": "wrk_dwec"
+    },
+    {
+      "_id": "req_get_tasks",
+      "_type": "request",
+      "name": "Get All Tasks",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/tasks",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_get_tasks_paginated",
+      "_type": "request",
+      "name": "Get Tasks (Paginated)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/tasks?page=1&limit=10",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_get_tasks_search",
+      "_type": "request",
+      "name": "Get Tasks (Search)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/tasks?search=react",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_get_task_by_id",
+      "_type": "request",
+      "name": "Get Task by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/tasks/TASK_ID_AQUI",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_create_task",
+      "_type": "request",
+      "name": "Create Task",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/tasks",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Nueva tarea desde Insomnia\",\n  \"completed\": false\n}"
+      },
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_update_task",
+      "_type": "request",
+      "name": "Update Task",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/api/tasks/TASK_ID_AQUI",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Tarea actualizada\",\n  \"completed\": true\n}"
+      },
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "req_delete_task",
+      "_type": "request",
+      "name": "Delete Task",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/tasks/TASK_ID_AQUI",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_tasks"
+    },
+    {
+      "_id": "fld_admin",
+      "_type": "request_group",
+      "name": "Admin (Only ADMIN role)",
+      "parentId": "wrk_dwec"
+    },
+    {
+      "_id": "req_admin_users",
+      "_type": "request",
+      "name": "Get All Users (ADMIN)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/users",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_admin"
+    },
+    {
+      "_id": "req_admin_stats",
+      "_type": "request",
+      "name": "Get Stats (ADMIN)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/admin/stats",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "body": {},
+      "parentId": "fld_admin"
+    }
+  ]
+}

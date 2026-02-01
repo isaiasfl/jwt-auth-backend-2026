@@ -1,0 +1,63 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dwec-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dwec_user
+      POSTGRES_PASSWORD: dwec_password
+      POSTGRES_DB: dwec_db
+    ports:
+      - "3501:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dwec-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dwec_user -d dwec_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: dwec-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: isaias@dwec.com
+      PGADMIN_DEFAULT_PASSWORD: dwec-2026
+    ports:
+      - "3502:80"
+    depends_on:
+      - postgres
+    networks:
+      - dwec-network
+
+  backend:
+    build: .
+    container_name: dwec-backend
+    restart: unless-stopped
+    ports:
+      - "3500:3500"
+    environment:
+      NODE_ENV: development
+      PORT: 3500
+      CORS_ORIGIN: http://localhost:5173
+      JWT_SECRET: tu_super_secreto_jwt_cambiar_en_produccion_12345
+      JWT_EXPIRES_IN: 1h
+      DATABASE_URL: postgresql://dwec_user:dwec_password@postgres:5432/dwec_db?schema=public
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./prisma:/app/prisma
+    networks:
+      - dwec-network
+
+volumes:
+  postgres_data:
+
+networks:
+  dwec-network:
+    driver: bridge
