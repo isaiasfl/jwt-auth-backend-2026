@@ -13,6 +13,8 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
+[![GitHub](https://img.shields.io/badge/GitHub-jwt--auth--backend--2026-181717?style=for-the-badge&logo=github)](https://github.com/isaiasfl/jwt-auth-backend-2026)
+
 </div>
 
 Backend educativo completo con Node.js + Express + TypeScript + Prisma + JWT diseñado para que alumnos de React practiquen autenticación y operaciones CRUD.
