@@ -1,5 +1,8 @@
 # Backend DWEC - Prisma + JWT
 
+> **Autor:** Isaías Fernández Lozano | 📧 [ifernandez@ieshlanz.es](mailto:ifernandez@ieshlanz.es) | 🐙 [@isaiasfl](https://github.com/isaiasfl)  
+> **Módulo:** DWEC (Desarrollo Web en Entorno Cliente) | 🎓 IES Hermenegildo Lanz | 📅 Febrero 2026
+
 <div align="center">
 
 ![Node.js](https://img.shields.io/badge/Node.js-20-339933?style=for-the-badge&logo=node.js&logoColor=white)
@@ -225,37 +228,28 @@ docker compose exec backend npx prisma migrate dev # Nueva migración
 
 ---
 
-## 👨‍💻 Autor
+## � Licencia
 
-**Isaías Fernández Lozano**
-
-- 📧 Email: [ifernandez@ieshlanz.es](mailto:ifernandez@ieshlanz.es)
-- 🐙 GitHub: [@isaiasfl](https://github.com/isaiasfl)
-- 📚 Módulo: **DWEC** (Desarrollo Web en Entorno Cliente)
-- 🎓 Centro: IES Hermenegildo Lanz
-- 📅 Fecha: Febrero 2026
-
----
-
-## 📄 Licencia
-
-```
 MIT License - Proyecto Educativo
 
 Este proyecto tiene fines educativos y está disponible para su uso libre
 en contextos de aprendizaje y enseñanza.
+en contextos de aprendizaje y enseñanza.
 
 # Prisma
-npm run prisma:generate       # Generar cliente
-npm run prisma:migrate        # Crear/aplicar migraciones
-npm run prisma:seed           # Ejecutar seed
-npm run prisma:studio         # Abrir Prisma Studio
+
+npm run prisma:generate # Generar cliente
+npm run prisma:migrate # Crear/aplicar migraciones
+npm run prisma:seed # Ejecutar seed
+npm run prisma:studio # Abrir Prisma Studio
 
 # Desarrollo
-npm run dev                   # Modo desarrollo
-npm run build                 # Compilar TypeScript
-npm start                     # Ejecutar compilado
-```
+
+npm run dev # Modo desarrollo
+npm run build # Compilar TypeScript
+npm start # Ejecutar compilado
+
+````
 
 ## Crear un nuevo recurso
 
@@ -292,7 +286,7 @@ backend:
 
 # .env
 PORT=NUEVO_PUERTO
-```
+````
 
 **PostgreSQL (3501) y pgAdmin (3502):**
 
