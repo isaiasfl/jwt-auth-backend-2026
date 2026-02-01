@@ -24,8 +24,13 @@
     "postgresql",
     "rest-api"
   ],
-  "author": "DWEC",
+  "author": "Isaías Fernández Lozano <ifernandez@ieshlanz.es>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isaiasfl/jwt-auth-backend-2026.git"
+  },
+  "homepage": "https://github.com/isaiasfl/jwt-auth-backend-2026#readme",
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "bcrypt": "^5.1.1",
